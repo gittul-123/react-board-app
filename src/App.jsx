@@ -2,6 +2,7 @@ import { BrowserRouter, Link, Routes, Route } from 'react-router-dom'
 import Home from './pages/Home.jsx'
 import ReviewList from './pages/ReviewList.jsx'
 import ReviewDetail from './pages/ReviewDetail.jsx'
+import ReviewForm from './pages/ReviewForm.jsx'
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/reviews" element={<ReviewList />} />
         <Route path="/reviews/:id" element={<ReviewDetail />} />
+        <Route path="/reviews/new" element={<ReviewForm />} />
       </Routes>
     </BrowserRouter>
   )
