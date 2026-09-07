@@ -3,6 +3,7 @@ import Home from './pages/Home.jsx'
 import ReviewList from './pages/ReviewList.jsx'
 import ReviewDetail from './pages/ReviewDetail.jsx'
 import ReviewForm from './pages/ReviewForm.jsx'
+import NotFound from './pages/NotFound.jsx'
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/reviews" element={<ReviewList />} />
         <Route path="/reviews/:id" element={<ReviewDetail />} />
         <Route path="/reviews/new" element={<ReviewForm />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   )
