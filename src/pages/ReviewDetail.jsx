@@ -6,6 +6,7 @@ import EmptyState from '../components/EmptyState.jsx'
 import { useNavigate } from 'react-router-dom'
 import { supabase } from '../lib/supabaseClient.js'
 import Button from '../components/Button.jsx'
+import { Link } from 'react-router-dom'
 
 
 function ReviewDetail() {
@@ -42,6 +43,9 @@ function ReviewDetail() {
                 rating={review.rating}
             />
             <p>{review.content}</p>
+            <Link to = {`/reviews/${review.id}/edit`}>
+                <Button>수정</Button>
+            </Link>
             <Button onClick={handleDelete}>삭제</Button>
         </div>
     )
