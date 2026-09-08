@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { supabase } from '../lib/supabaseClient.js'
 import Button from '../components/Button.jsx'
+import { useNavigate } from 'react-router-dom'
 
 function ReviewForm() {
   const [title, setTitle] = useState('')
@@ -9,6 +10,7 @@ function ReviewForm() {
   const [rating, setRating] = useState(0)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [errors, setErrors] = useState({})
+  const navigate = useNavigate()
 
   function validate() {
     const newErrors = {}
@@ -54,11 +56,8 @@ function ReviewForm() {
     if (error) {
         console.error(error.message)
     } else {
-        console.log('등록 성공!')
-        setTitle('')
-        setCategory('')
-        setContent('')
-        setRating(0)
+      window.alert('리뷰가 등록되었습니다!')
+        navigate('/reviews')
     }
     setIsSubmitting(false)
   }
