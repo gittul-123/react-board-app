@@ -1,13 +1,17 @@
 import { useState, useEffect } from 'react'
 import { supabase } from '../lib/supabaseClient.js'
+import { useReviewDetail } from '../hooks/useReviewDetail.js'
+import { useNavigate } from 'react-router-dom'
 
 function ReviewEdit() {
+  const { review, loading, error } = useReviewDetail()
   const [title, setTitle] = useState('')
   const [category, setCategory] = useState('')
   const [content, setContent] = useState('')
   const [rating, setRating] = useState(0)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [errors, setErrors] = useState({})
+  const navigate = useNavigate()
 
   useEffect(() => {
     if (review) {
@@ -53,28 +57,25 @@ function ReviewEdit() {
 
     const { error } = await supabase
     .from('reviews')
-    .insert([{
+    .update({
       title,
       category,
       content,
       rating
-    }])
+    })
+    .eq('id', review.id)
 
     if (error) {
         console.error(error.message)
     } else {
-        console.log('등록 성공!')
-        setTitle('')
-        setCategory('')
-        setContent('')
-        setRating(0)
+      navigate(`/reviews/${review.id}`)
     }
     setIsSubmitting(false)
   }
 
   return (
     <div>
-      <h1>리뷰 작성</h1>
+      <h1>리뷰 수정</h1>
       <form onSubmit={handleSubmit} noValidate>
         <div>
           <label>제목</label>
@@ -118,7 +119,7 @@ function ReviewEdit() {
             />
         </div>
         <button type="submit" disabled={isSubmitting}>
-          {isSubmitting ? '등록 중...' : '등록'}
+          {isSubmitting ? '수정 중...' : '수정 완료'}
         </button>
       </form>
     </div>
