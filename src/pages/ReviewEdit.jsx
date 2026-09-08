@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { supabase } from '../lib/supabaseClient.js'
 import { useReviewDetail } from '../hooks/useReviewDetail.js'
 import { useNavigate } from 'react-router-dom'
+import Button from '../components/Button.jsx'
 
 function ReviewEdit() {
   const { review, loading, error } = useReviewDetail()
@@ -118,9 +119,9 @@ function ReviewEdit() {
                 onChange={(e) => setRating(Number(e.target.value))}
             />
         </div>
-        <button type="submit" disabled={isSubmitting}>
-          {isSubmitting ? '수정 중...' : '수정 완료'}
-        </button>
+        <Button type="submit" isLoading={isSubmitting} loadingText="수정 중...">
+          수정 완료
+        </Button>
       </form>
     </div>
   )

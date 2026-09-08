@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { supabase } from '../lib/supabaseClient.js'
+import Button from '../components/Button.jsx'
 
 function ReviewForm() {
   const [title, setTitle] = useState('')
@@ -107,9 +108,9 @@ function ReviewForm() {
                 onChange={(e) => setRating(Number(e.target.value))}
             />
         </div>
-        <button type="submit" disabled={isSubmitting}>
-          {isSubmitting ? '등록 중...' : '등록'}
-        </button>
+        <Button type="submit" isLoading={isSubmitting} loadingText="등록 중...">
+          등록
+        </Button>
       </form>
     </div>
   )

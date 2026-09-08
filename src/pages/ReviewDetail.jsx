@@ -5,6 +5,7 @@ import ErrorState from '../components/ErrorState.jsx'
 import EmptyState from '../components/EmptyState.jsx'
 import { useNavigate } from 'react-router-dom'
 import { supabase } from '../lib/supabaseClient.js'
+import Button from '../components/Button.jsx'
 
 
 function ReviewDetail() {
@@ -41,7 +42,7 @@ function ReviewDetail() {
                 rating={review.rating}
             />
             <p>{review.content}</p>
-            <button onClick={handleDelete}>삭제</button>
+            <Button onClick={handleDelete}>삭제</Button>
         </div>
     )
 }
