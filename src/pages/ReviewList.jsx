@@ -3,6 +3,7 @@ import ReviewCard from '../components/ReviewCard.jsx'
 import LoadingState from '../components/LoadingState.jsx'
 import ErrorState from '../components/ErrorState.jsx'
 import EmptyState from '../components/EmptyState.jsx'
+import { Link } from 'react-router-dom'
 
 
 function ReviewList() {
@@ -17,12 +18,13 @@ function ReviewList() {
             <h1>리뷰 목록</h1>
             <ul>
                 {reviews.map((review) => (
-                    <ReviewCard
-                        key={review.id}
-                        title={review.title}
-                        category={review.category}
-                        rating={review.rating}
-                    />
+                    <Link key = {review.id} to={`/reviews/${review.id}`}>
+                        <ReviewCard
+                            title={review.title}
+                            category={review.category}
+                            rating={review.rating}
+                        />
+                    </Link>
                 ))}
             </ul>
         </div>

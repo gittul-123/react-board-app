@@ -3,14 +3,35 @@ import ReviewCard from '../components/ReviewCard.jsx'
 import LoadingState from '../components/LoadingState.jsx'
 import ErrorState from '../components/ErrorState.jsx'
 import EmptyState from '../components/EmptyState.jsx'
+import { useNavigate } from 'react-router-dom'
+import { supabase } from '../lib/supabaseClient.js'
 
 
 function ReviewDetail() {
   const { review, loading, error } = useReviewDetail()
+  const navigate = useNavigate()
+
+  async function handleDelete() {
+        const confirmed = window.confirm('정말 삭제하시겠습니까?')
+        if (!confirmed) return
+
+        const { error } = await supabase
+        .from('reviews')
+        .delete()
+        .eq('id', review.id)
+
+
+        if (error) {
+            console.error(error.message)
+        } else {
+            navigate('/reviews')
+        }
+    }
 
     if (loading) return <LoadingState />
     if (error) return <ErrorState error={error} />
     if (!review) return <EmptyState />
+
     return (
         <div>
             <h1>리뷰 상세</h1>
@@ -20,6 +41,7 @@ function ReviewDetail() {
                 rating={review.rating}
             />
             <p>{review.content}</p>
+            <button onClick={handleDelete}>삭제</button>
         </div>
     )
 }
